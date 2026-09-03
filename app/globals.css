@@ -1,81 +1,442 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  color: #1f2937;
-  background: #f8fafc;
-  font-family: Arial, sans-serif;
+  padding: 0;
 }
+
+body {
+  background:
+    radial-gradient(circle at 20% 10%, #172554 0, transparent 30%),
+    radial-gradient(circle at 80% 20%, #312e81 0, transparent 28%),
+    #050816;
+
+  color: #f8fafc;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
 
 .siteHeader {
-  background: #14532d;
+  background: rgba(5, 8, 22, 0.9);
+  border-bottom: 1px solid #1e40af;
+
+  padding: 20px 30px;
+
+  box-shadow:
+    0 0 25px rgba(37, 99, 235, 0.2);
 }
 
-.navbar,
-.page {
-  width: min(100% - 2rem, 70rem);
-  margin-inline: auto;
-}
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
 
-.navList {
   display: flex;
-  gap: 1rem;
-  margin: 0;
-  padding: 1rem 0;
-  list-style: none;
+  align-items: center;
+  gap: 32px;
 }
 
-.navLink {
-  color: white;
+.navbar a {
+  color: #cbd5e1;
   text-decoration: none;
+
+  font-weight: bold;
+  font-size: 16px;
+
+  transition: 0.25s;
 }
 
-.navLink:hover,
-.navLink:focus-visible {
-  text-decoration: underline;
+.navbar a:hover {
+  color: #38bdf8;
+
+  text-shadow:
+    0 0 12px rgba(56, 189, 248, 0.8);
 }
 
-.page {
-  padding-block: 2rem;
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+  max-width: 1250px;
+  margin: 0 auto;
+
+  padding: 70px 25px;
 }
 
-.courseGrid {
+
+/* =========================
+   MAIN TITLE
+========================= */
+
+main > h1 {
+  font-size: 58px;
+
+  margin: 0 0 12px;
+
+  letter-spacing: 4px;
+
+  background: linear-gradient(
+    90deg,
+    #38bdf8,
+    #818cf8,
+    #c084fc
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 0 30px rgba(56, 189, 248, 0.2);
+}
+
+main > p {
+  color: #94a3b8;
+
+  font-size: 19px;
+
+  margin-bottom: 45px;
+}
+
+
+/* =========================
+   BAND GRID
+========================= */
+
+.band-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1rem;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+
+  margin-top: 35px;
 }
 
-.courseCard {
-  padding: 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.75rem;
-  background: white;
+
+/* =========================
+   BAND CARD
+========================= */
+
+.band-card {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111827,
+      #0b1120
+    );
+
+  border: 1px solid #263b70;
+
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.5);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* เส้นเรืองแสงด้านบน */
+
+.band-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: linear-gradient(
+    90deg,
+    #38bdf8,
+    #6366f1,
+    #c084fc
+  );
+}
+
+
+/* Hover */
+
+.band-card:hover {
+  transform: translateY(-12px) scale(1.02);
+
+  border-color: #38bdf8;
+
+  box-shadow:
+    0 0 20px rgba(56, 189, 248, 0.25),
+    0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+
+/* =========================
+   BAND IMAGE
+========================= */
+
+.band-card img {
+  width: 100%;
+  height: 270px;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: 0.4s;
+}
+
+.band-card:hover img {
+  transform: scale(1.05);
+}
+
+
+/* =========================
+   BAND NAME
+========================= */
+
+.band-card h2 {
+  color: #f8fafc;
+
+  font-size: 30px;
+
+  margin: 22px 22px 10px;
+
+  letter-spacing: 1px;
+
+  text-shadow:
+    0 0 15px rgba(56, 189, 248, 0.25);
+}
+
+
+/* =========================
+   BAND INFO
+========================= */
+
+.band-card p {
+  color: #94a3b8;
+
+  margin: 8px 22px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   GENRE
+========================= */
+
+.band-card p:first-of-type {
+  display: inline-block;
+
+  background: #172554;
+
+  color: #38bdf8;
+
+  border: 1px solid #1d4ed8;
+
+  border-radius: 999px;
+
+  padding: 5px 12px;
+
+  font-size: 14px;
+
+  font-weight: bold;
+}
+
+
+/* =========================
+   MEMBER TITLE
+========================= */
+
+.band-card h3 {
+  color: #a78bfa;
+
+  font-size: 20px;
+
+  margin: 25px 22px 12px;
+
+  border-left: 4px solid #38bdf8;
+
+  padding-left: 10px;
+}
+
+
+/* =========================
+   MEMBER LIST
+========================= */
+
+.band-card ul {
+  margin: 0 22px 28px;
+
+  padding-left: 22px;
+
+  color: #cbd5e1;
+}
+
+.band-card li {
+  margin-bottom: 8px;
+}
+
+
+/* =========================
+   COURSES
+========================= */
+
+.course-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+
+  margin-top: 30px;
+}
+
+.course-card {
+  background: #111827;
+
+  border: 1px solid #263b70;
+
+  border-radius: 18px;
+
+  padding: 22px;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.course-card h2 {
+  color: #38bdf8;
+}
+
+.course-card p {
+  color: #94a3b8;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .band-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .course-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .band-grid,
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  main {
+    padding: 40px 16px;
+  }
+
+  main > h1 {
+    font-size: 38px;
+  }
+}
+/* =========================
+   MEMBERS
+========================= */
+
+.band-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 22px 30px;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 10px;
+
+  margin-bottom: 10px;
+
+  background: #0b1220;
+
+  border: 1px solid #1e3a5f;
+
+  border-radius: 14px;
+
+  transition: 0.25s;
+}
+
+.member:hover {
+  border-color: #38bdf8;
+
+  background: #111c32;
+
+  transform: translateX(5px);
+}
+
+
+/* รูปหน้าสมาชิก */
+
+.member img {
+  width: 55px;
+  height: 55px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 2px solid #38bdf8;
+
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.35);
+}
+
+
+/* ชื่อ + ตำแหน่ง */
+
+.member span {
+  display: flex;
+  flex-direction: column;
+
+  color: #f8fafc;
+
+  font-size: 16px;
+
+  font-weight: bold;
+}
+
+.member small {
+  margin-top: 4px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  font-weight: normal;
 }

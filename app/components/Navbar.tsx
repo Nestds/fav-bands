@@ -2,24 +2,11 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="navbar" aria-label="เมนูหลัก">
-      <ul className="navList">
-        <li>
-          <Link className="navLink" href="/">
-            หน้าแรก
-          </Link>
-        </li>
-        <li>
-          <Link className="navLink" href="/courses">
-            รายวิชา
-          </Link>
-        </li>
-        <li>
-          <Link className="navLink" href="/about">
-            เกี่ยวกับ
-          </Link>
-        </li>
-      </ul>
+    <nav className="navbar">
+      <Link href="/">Home</Link>
+      <Link href="/courses">Courses</Link>
+      <Link href="/about">About</Link>
+      <Link href="/bands">Favorite Bands</Link>
     </nav>
   );
 }
