@@ -42,7 +42,7 @@ export default function HomePage() {
             <p>รหัสวิชา: {course.code}</p>
             <p>{course.credits} หน่วยกิต</p>
             <p>
-              {course.isOpen ? "เปิดลงทะเบียน" : "ปิดลงทะเบียน"}
+              {course.isOpen ? "เปิดลงทะเบียน" : "ปิดลงทะเบีฅhttps://fav-bands.vercel.app/bandsยน"}
             </p>
           </article>
         ))}

@@ -6,3 +6,6 @@ export default function CoursesPage() {
     </main>
   );
 }
+<button type="button" onClick={() => console.log("clicked")}> 
+  ปุ่มทดลอง 
+</button> 

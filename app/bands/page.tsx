@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import BandCard from "@/app/components/BandCard";
 import type { Band } from "@/app/types/band";
+
+type SortOption = "name" | "year";
 
 const bands: Band[] = [
   {
@@ -8,84 +13,224 @@ const bands: Band[] = [
     genre: "Pop / R&B",
     description: "วงดนตรีดูโอจากประเทศไทย",
     image: "/images/bands/mirr.jpg",
+    foundedYear: 2018,
     members: [
       {
-  name: "นาว",
-  role: "ร้องนำ",
-  image: "/images/bands/mirrr_01.jpg",
-},
-{
-  name: "โต",
-  role: "ร้องนำ / ดนตรี",
-  image: "/images/bands/mirrr_02.jpg",
-},
+        name: "นาว",
+        role: "ร้องนำ",
+        image: "/images/bands/mirrr_01.jpg",
+      },
+      {
+        name: "โต",
+        role: "ร้องนำ / ดนตรี",
+        image: "/images/bands/mirrr_02.jpg",
+      },
     ],
   },
 
   {
-  id: 2,
-  name: "Dept",
-  genre: "Indie Pop",
-  description: "วงดนตรีไทยแนว Indie Pop ที่มีเอกลักษณ์ด้านเสียงเพลงและบรรยากาศของเพลง",
-  image: "/images/bands/dept.jpg",
+    id: 2,
+    name: "Dept",
+    genre: "Indie Pop",
+    description:
+      "วงดนตรีไทยแนว Indie Pop ที่มีเอกลักษณ์ด้านเสียงเพลงและบรรยากาศของเพลง",
+    image: "/images/bands/dept.jpg",
+    foundedYear: 2015,
+    members: [
+      {
+        name: "ลุค ทศพล",
+        role: "ร้องนำ",
+        image: "/images/bands/look.png",
+      },
+      {
+        name: "เบนซ์ ภวัต",
+        role: "กีตาร์",
+        image: "/images/bands/benz.png",
+      },
+    ],
+  },
+
+  {
+  id: 3,
+  name: "Fellow Fellow",
+  genre: "Pop",
+  description:
+    "วงดนตรีดูโอแนวป๊อปฟีลกู๊ด เจ้าของเพลงฮิตดาวหางฮัลเลย์",
+  image: "/images/bands/fellow-fellow.jpg",
+  foundedYear: 2016,
   members: [
     {
-  name: "ลุค ทศพล",
-  role: "ร้องนำ",
-  image: "/images/bands/look.png",
-},
-{
-  name: "เบนซ์ ภวัต",
-  role: "กีตาร์",
-  image: "/images/bands/benz.png",
-},
+      name: "ข้าว - ปณิธิ เลิศอุดมธนา",
+      role: "ร้องนำ",
+      image: "/images/bands/fellow-khao.jpg",
+    },
+    {
+      name: "ที - พิษณุ หทัยพัธลักษณ์",
+      role: "กีตาร์และร้องประสาน",
+      image: "/images/bands/fellow-tee.jpg",
+    },
   ],
 },
-
-  {
-    id: 3,
-    name: "Maroon 5",
-    genre: "Pop Rock",
-    description: "วงดนตรี Pop Rock จากสหรัฐอเมริกา",
-    image: "/images/bands/maroon-5.jpg",
-
-     members: [
-  {
-    name: "Adam Levine",
-    role: "ร้องนำ",
-    image: "/images/bands/Maroon-adam.jpg",
-  },
-  {
-    name: "James Valentine",
-    role: "กีตาร์",
-    image: "/images/bands/Maroon-jame.jpg",
-  },
-  {
-    name: "Jesse Carmichael",
-    role: "คีย์บอร์ด",
-    image: "/images/bands/Maroon_jesse.jpg",
-  },
-  {
-    name: "Matt Flynn",
-    role: "กลอง",
-    image: "/images/bands/maroon-Matt.jpg",
-  },
-],
-  },
 ];
 
 export default function BandsPage() {
+  // ค้นหา
+  const [keyword, setKeyword] = useState("");
+
+  // เก็บวงที่ติดตาม
+  const [followedBands, setFollowedBands] = useState<number[]>([]);
+
+  // เก็บจำนวน Like ของแต่ละวง
+  const [likes, setLikes] = useState<Record<number, number>>({});
+
+  // เงื่อนไขการเรียง
+  const [sortBy, setSortBy] = useState<SortOption>("name");
+
+  // Filter วงตามชื่อ
+  const filteredBands = bands.filter((band) =>
+    band.name.toLowerCase().includes(keyword.toLowerCase())
+  );
+
+  // Sort วง
+  const displayedBands = [...filteredBands].sort((a, b) => {
+    if (sortBy === "name") {
+      return a.name.localeCompare(b.name);
+    }
+
+    return a.foundedYear - b.foundedYear;
+  });
+
+  // Follow / Unfollow
+  function handleFollow(bandId: number) {
+    setFollowedBands((current) => {
+      if (current.includes(bandId)) {
+        return current.filter((id) => id !== bandId);
+      }
+
+      return [...current, bandId];
+    });
+  }
+
+  // Like
+  function handleLike(bandId: number) {
+    setLikes((current) => ({
+      ...current,
+      [bandId]: (current[bandId] || 0) + 1,
+    }));
+  }
+
+  // ล้างเงื่อนไข Search และ Sort
+  function handleClear() {
+    setKeyword("");
+    setSortBy("name");
+  }
+
   return (
-    <main>
-      <h1>Favorite Bands</h1>
+    <main className="bands-page">
+      {/* Header */}
+      <section className="bands-hero">
+        <p className="eyebrow">MY MUSIC COLLECTION</p>
 
-      <p>วงดนตรีที่ฉันชื่นชอบ</p>
+        <h1>Favorite Bands</h1>
 
-      <section className="band-grid">
-        {bands.map((band) => (
-          <BandCard key={band.id} band={band} />
-        ))}
+        <p className="subtitle">
+          รวมวงดนตรีที่ฉันชื่นชอบ 🎧
+        </p>
+
+        {/* Search */}
+        <div className="search-box">
+          <span>🔎</span>
+
+          <input
+            type="search"
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+            placeholder="ค้นหาชื่อวงดนตรี..."
+          />
+
+          {keyword && (
+            <button onClick={() => setKeyword("")}>
+              ✕
+            </button>
+          )}
+        </div>
+
+        {/* Search Result */}
+        {keyword && filteredBands.length > 0 && (
+          <div className="search-result">
+            พบ {filteredBands.length} วง
+          </div>
+        )}
+
+        {/* Sort + Clear */}
+        <div className="filter-bar">
+          <label htmlFor="sort">
+            เรียงตาม
+          </label>
+
+          <select
+            id="sort"
+            value={sortBy}
+            onChange={(event) =>
+              setSortBy(event.target.value as SortOption)
+            }
+          >
+            <option value="name">
+              ชื่อวง A-Z
+            </option>
+
+            <option value="year">
+              ปีที่ก่อตั้ง
+            </option>
+          </select>
+
+          <button
+            className="clear-btn"
+            onClick={handleClear}
+          >
+            ↺ ล้างเงื่อนไข
+          </button>
+        </div>
+
+        {/* Follow Summary */}
+        <div className="follow-summary">
+          ⭐ กำลังติดตามอยู่{" "}
+          <strong>{followedBands.length}</strong> วง
+        </div>
       </section>
+
+      {/* Empty State */}
+      {displayedBands.length === 0 ? (
+        <section className="empty-state">
+          <div className="empty-icon">
+            🎧
+          </div>
+
+          <h2>ไม่พบวงดนตรี</h2>
+
+          <p>
+            ไม่พบวงที่ตรงกับ &quot;{keyword}&quot;
+          </p>
+
+          <button onClick={handleClear}>
+            แสดงวงทั้งหมด
+          </button>
+        </section>
+      ) : (
+        /* Band Cards */
+        <section className="band-grid">
+          {displayedBands.map((band) => (
+            <BandCard
+              key={band.id}
+              band={band}
+              isFollowed={followedBands.includes(band.id)}
+              likeCount={likes[band.id] || 0}
+              onFollow={() => handleFollow(band.id)}
+              onLike={() => handleLike(band.id)}
+            />
+          ))}
+        </section>
+      )}
     </main>
   );
 }

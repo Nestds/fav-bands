@@ -3,43 +3,105 @@ import type { Band } from "@/app/types/band";
 
 type BandCardProps = {
   band: Band;
+  isFollowed: boolean;
+  likeCount: number;
+  onFollow: () => void;
+  onLike: () => void;
 };
 
-export default function BandCard({ band }: BandCardProps) {
+export default function BandCard({
+  band,
+  isFollowed,
+  likeCount,
+  onFollow,
+  onLike,
+}: BandCardProps) {
   return (
     <article className="band-card">
-      <Image
-        src={band.image}
-        alt={band.name}
-        width={400}
-        height={250}
-      />
+      <div className="band-image">
+        <Image
+          src={band.image}
+          alt={band.name}
+          width={500}
+          height={300}
+        />
 
-      <h2>{band.name}</h2>
+        <div className="image-overlay">
+          <span>♪</span>
+        </div>
+      </div>
 
-      <p>แนวเพลง: {band.genre}</p>
+      <div className="band-content">
+        <h2>{band.name}</h2>
 
-      <p>{band.description}</p>
+        <span className="genre">
+          {band.genre}
+        </span>
 
-      <h3>สมาชิกวง</h3>
+        <p className="description">
+          {band.description}
+        </p>
 
-      <ul>
-        {band.members.map((member) => (
-          <li key={member.name} className="member">
-            <Image
-              src={member.image}
-              alt={member.name}
-              width={50}
-              height={50}
-            />
+        <p className="founded-year">
+          🎵 ก่อตั้งปี {band.foundedYear}
+        </p>
 
-            <span>
-              {member.name}
-              <small>{member.role}</small>
-            </span>
-          </li>
-        ))}
-      </ul>
+        <div className="actions">
+          <button
+            className={
+              isFollowed
+                ? "follow-btn followed"
+                : "follow-btn"
+            }
+            onClick={onFollow}
+          >
+            {isFollowed
+              ? "✓ ติดตามแล้ว"
+              : "+ ติดตาม"}
+          </button>
+
+          <button
+            className="like-btn"
+            onClick={onLike}
+          >
+            ❤️ Like {likeCount}
+          </button>
+        </div>
+
+        <div className="members-title">
+          <span>สมาชิกวง</span>
+
+          <strong>
+            {band.members.length} คน
+          </strong>
+        </div>
+
+        <ul className="member-list">
+          {band.members.map((member) => (
+            <li
+              key={member.name}
+              className="member"
+            >
+              <Image
+                src={member.image}
+                alt={member.name}
+                width={55}
+                height={55}
+              />
+
+              <span>
+                <strong>
+                  {member.name}
+                </strong>
+
+                <small>
+                  {member.role}
+                </small>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </article>
   );
 }

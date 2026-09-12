@@ -10,5 +10,6 @@ export type Band = {
   genre: string;
   description: string;
   image: string;
+  foundedYear: number;
   members: BandMember[];
 };

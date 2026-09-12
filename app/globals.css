@@ -10,27 +10,31 @@ body {
 
 body {
   background:
-    radial-gradient(circle at 20% 10%, #172554 0, transparent 30%),
-    radial-gradient(circle at 80% 20%, #312e81 0, transparent 28%),
+    radial-gradient(
+      circle at 15% 10%,
+      #172554 0,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      #312e81 0,
+      transparent 30%
+    ),
     #050816;
 
   color: #f8fafc;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 /* =========================
    NAVBAR
 ========================= */
 
 .siteHeader {
-  background: rgba(5, 8, 22, 0.9);
+  background: rgba(5, 8, 22, 0.92);
   border-bottom: 1px solid #1e40af;
-
   padding: 20px 30px;
-
-  box-shadow:
-    0 0 25px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.2);
 }
 
 .navbar {
@@ -45,20 +49,13 @@ body {
 .navbar a {
   color: #cbd5e1;
   text-decoration: none;
-
   font-weight: bold;
-  font-size: 16px;
-
   transition: 0.25s;
 }
 
 .navbar a:hover {
   color: #38bdf8;
-
-  text-shadow:
-    0 0 12px rgba(56, 189, 248, 0.8);
 }
-
 
 /* =========================
    MAIN
@@ -67,20 +64,30 @@ body {
 main {
   max-width: 1250px;
   margin: 0 auto;
-
-  padding: 70px 25px;
+  padding: 60px 25px;
 }
 
-
 /* =========================
-   MAIN TITLE
+   HERO
 ========================= */
 
-main > h1 {
-  font-size: 58px;
+.bands-hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
 
-  margin: 0 0 12px;
+.eyebrow {
+  color: #38bdf8;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
 
+.bands-hero h1 {
+  margin: 0;
+
+  font-size: 64px;
   letter-spacing: 4px;
 
   background: linear-gradient(
@@ -92,243 +99,433 @@ main > h1 {
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
-  text-shadow:
-    0 0 30px rgba(56, 189, 248, 0.2);
 }
 
-main > p {
+.subtitle {
   color: #94a3b8;
-
-  font-size: 19px;
-
-  margin-bottom: 45px;
+  font-size: 18px;
+  margin: 15px 0 30px;
 }
-
 
 /* =========================
-   BAND GRID
+   SEARCH
+========================= */
+
+.search-box {
+  width: 100%;
+  max-width: 600px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 5px 15px;
+
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid #334155;
+  border-radius: 15px;
+
+  box-shadow:
+    0 0 25px rgba(56, 189, 248, 0.08);
+
+  transition: 0.25s;
+}
+
+.search-box:focus-within {
+  border-color: #38bdf8;
+
+  box-shadow:
+    0 0 25px rgba(56, 189, 248, 0.25);
+}
+
+.search-box span {
+  font-size: 20px;
+}
+
+.search-box input {
+  flex: 1;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: white;
+  font-size: 16px;
+
+  padding: 14px 0;
+}
+
+.search-box input::placeholder {
+  color: #64748b;
+}
+
+.search-box button {
+  border: none;
+  background: transparent;
+
+  color: #94a3b8;
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  color: #f87171;
+}
+
+/* =========================
+   FOLLOW SUMMARY
+========================= */
+
+.follow-summary {
+  display: inline-block;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  background: #111c3a;
+  border: 1px solid #3730a3;
+
+  color: #c4b5fd;
+}
+
+.follow-summary strong {
+  color: #38bdf8;
+}
+
+/* =========================
+   GRID
 ========================= */
 
 .band-grid {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 30px;
-
-  margin-top: 35px;
 }
 
-
 /* =========================
-   BAND CARD
+   CARD
 ========================= */
 
 .band-card {
-  position: relative;
+  overflow: hidden;
 
   background:
     linear-gradient(
       145deg,
       #111827,
-      #0b1120
+      #080d1c
     );
 
   border: 1px solid #263b70;
-
   border-radius: 22px;
 
-  overflow: hidden;
-
   box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.5);
+    0 15px 40px rgba(0, 0, 0, 0.45);
 
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
-
-
-/* เส้นเรืองแสงด้านบน */
-
-.band-card::before {
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 4px;
-
-  background: linear-gradient(
-    90deg,
-    #38bdf8,
-    #6366f1,
-    #c084fc
-  );
-}
-
-
-/* Hover */
 
 .band-card:hover {
-  transform: translateY(-12px) scale(1.02);
+  transform: translateY(-10px);
 
   border-color: #38bdf8;
 
   box-shadow:
-    0 0 20px rgba(56, 189, 248, 0.25),
-    0 20px 50px rgba(0, 0, 0, 0.6);
+    0 0 25px rgba(56, 189, 248, 0.2),
+    0 25px 50px rgba(0, 0, 0, 0.5);
 }
-
 
 /* =========================
    BAND IMAGE
 ========================= */
 
-.band-card img {
-  width: 100%;
+.band-image {
+  position: relative;
   height: 270px;
+  overflow: hidden;
+}
+
+.band-image img {
+  width: 100%;
+  height: 100%;
 
   object-fit: cover;
 
-  display: block;
-
-  transition: 0.4s;
+  transition: 0.5s;
 }
 
-.band-card:hover img {
-  transform: scale(1.05);
+.band-card:hover .band-image img {
+  transform: scale(1.06);
 }
 
+.image-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    transparent 40%,
+    rgba(5, 8, 22, 0.75)
+  );
+
+  opacity: 0;
+
+  transition: 0.3s;
+}
+
+.band-card:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-overlay span {
+  font-size: 55px;
+  color: #38bdf8;
+
+  text-shadow:
+    0 0 20px #38bdf8;
+}
 
 /* =========================
-   BAND NAME
+   CONTENT
 ========================= */
 
-.band-card h2 {
-  color: #f8fafc;
+.band-content {
+  padding: 22px;
+}
+
+.band-content h2 {
+  margin: 0 0 12px;
 
   font-size: 30px;
 
-  margin: 22px 22px 10px;
-
-  letter-spacing: 1px;
-
-  text-shadow:
-    0 0 15px rgba(56, 189, 248, 0.25);
+  color: #f8fafc;
 }
 
-
-/* =========================
-   BAND INFO
-========================= */
-
-.band-card p {
-  color: #94a3b8;
-
-  margin: 8px 22px;
-
-  line-height: 1.7;
-}
-
-
-/* =========================
-   GENRE
-========================= */
-
-.band-card p:first-of-type {
+.genre {
   display: inline-block;
 
-  background: #172554;
-
-  color: #38bdf8;
-
-  border: 1px solid #1d4ed8;
+  padding: 6px 13px;
 
   border-radius: 999px;
 
-  padding: 5px 12px;
+  background: #172554;
+  border: 1px solid #1d4ed8;
 
-  font-size: 14px;
+  color: #38bdf8;
 
+  font-size: 13px;
   font-weight: bold;
 }
 
+.description {
+  color: #94a3b8;
+  line-height: 1.7;
+  min-height: 55px;
+}
 
 /* =========================
-   MEMBER TITLE
+   BUTTONS
 ========================= */
 
-.band-card h3 {
-  color: #a78bfa;
+.actions {
+  display: flex;
+  gap: 10px;
 
-  font-size: 20px;
-
-  margin: 25px 22px 12px;
-
-  border-left: 4px solid #38bdf8;
-
-  padding-left: 10px;
+  margin: 20px 0;
 }
 
+.actions button {
+  flex: 1;
 
-/* =========================
-   MEMBER LIST
-========================= */
+  padding: 11px 10px;
 
-.band-card ul {
-  margin: 0 22px 28px;
+  border-radius: 10px;
 
-  padding-left: 22px;
+  font-weight: bold;
+  cursor: pointer;
 
-  color: #cbd5e1;
+  transition: 0.25s;
 }
 
-.band-card li {
-  margin-bottom: 8px;
+.follow-btn {
+  background: #1d4ed8;
+  border: 1px solid #3b82f6;
+
+  color: white;
 }
 
-
-/* =========================
-   COURSES
-========================= */
-
-.course-grid {
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 25px;
-
-  margin-top: 30px;
-}
-
-.course-card {
-  background: #111827;
-
-  border: 1px solid #263b70;
-
-  border-radius: 18px;
-
-  padding: 22px;
+.follow-btn:hover {
+  background: #2563eb;
 
   box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.35);
+    0 0 15px rgba(59, 130, 246, 0.4);
 }
 
-.course-card h2 {
+.follow-btn.followed {
+  background: #312e81;
+  border-color: #818cf8;
+  color: #c4b5fd;
+}
+
+.like-btn {
+  background: #1e293b;
+  border: 1px solid #475569;
+
+  color: #f8fafc;
+}
+
+.like-btn:hover {
+  border-color: #f472b6;
+
+  background: #30152c;
+
+  transform: scale(1.03);
+}
+
+/* =========================
+   MEMBERS
+========================= */
+
+.members-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 20px;
+  margin-bottom: 12px;
+
+  padding-left: 12px;
+
+  border-left: 4px solid #38bdf8;
+}
+
+.members-title span {
+  color: #c4b5fd;
+  font-weight: bold;
+}
+
+.members-title strong {
   color: #38bdf8;
+  font-size: 13px;
 }
 
-.course-card p {
+.member-list {
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 9px;
+
+  margin-bottom: 9px;
+
+  background: #0b1220;
+
+  border: 1px solid #1e3a5f;
+  border-radius: 12px;
+
+  transition: 0.25s;
+}
+
+.member:hover {
+  border-color: #38bdf8;
+  transform: translateX(4px);
+}
+
+.member img {
+  width: 50px;
+  height: 50px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 2px solid #38bdf8;
+}
+
+.member span {
+  display: flex;
+  flex-direction: column;
+}
+
+.member strong {
+  color: #f8fafc;
+  font-size: 14px;
+}
+
+.member small {
+  color: #94a3b8;
+  margin-top: 3px;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  text-align: center;
+
+  padding: 80px 20px;
+
+  background: rgba(15, 23, 42, 0.7);
+
+  border: 1px dashed #475569;
+  border-radius: 22px;
+}
+
+.empty-icon {
+  font-size: 60px;
+}
+
+.empty-state h2 {
+  color: #f8fafc;
+}
+
+.empty-state p {
   color: #94a3b8;
 }
 
+.empty-state button {
+  margin-top: 15px;
+
+  padding: 12px 22px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.empty-state button:hover {
+  background: #3b82f6;
+}
 
 /* =========================
    MOBILE
@@ -338,105 +535,18 @@ main > p {
   .band-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .course-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
-
 @media (max-width: 600px) {
-  .band-grid,
-  .course-grid {
+  .band-grid {
     grid-template-columns: 1fr;
   }
 
-  .navbar {
-    flex-wrap: wrap;
-    gap: 15px;
+  .bands-hero h1 {
+    font-size: 42px;
   }
 
-  main {
-    padding: 40px 16px;
+  .actions {
+    flex-direction: column;
   }
-
-  main > h1 {
-    font-size: 38px;
-  }
-}
-/* =========================
-   MEMBERS
-========================= */
-
-.band-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 15px 22px 30px;
-}
-
-.member {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-
-  padding: 10px;
-
-  margin-bottom: 10px;
-
-  background: #0b1220;
-
-  border: 1px solid #1e3a5f;
-
-  border-radius: 14px;
-
-  transition: 0.25s;
-}
-
-.member:hover {
-  border-color: #38bdf8;
-
-  background: #111c32;
-
-  transform: translateX(5px);
-}
-
-
-/* รูปหน้าสมาชิก */
-
-.member img {
-  width: 55px;
-  height: 55px;
-
-  object-fit: cover;
-
-  border-radius: 50%;
-
-  border: 2px solid #38bdf8;
-
-  box-shadow:
-    0 0 12px rgba(56, 189, 248, 0.35);
-}
-
-
-/* ชื่อ + ตำแหน่ง */
-
-.member span {
-  display: flex;
-  flex-direction: column;
-
-  color: #f8fafc;
-
-  font-size: 16px;
-
-  font-weight: bold;
-}
-
-.member small {
-  margin-top: 4px;
-
-  color: #94a3b8;
-
-  font-size: 13px;
-
-  font-weight: normal;
 }
